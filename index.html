@@ -317,6 +317,16 @@ if (storedValue) {
 } else {
     console.log('Data has expired or does not exist.');
 }
+
+
+// Lazy Loading
+        function lazyLoadMedia() {
+            document.querySelectorAll('img[data-src], video[loading="lazy"]').forEach(media => {
+                media.src = media.dataset.src || media.src;
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", lazyLoadMedia);
     </script>
 </body>
 </html>
