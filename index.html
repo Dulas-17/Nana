@@ -271,42 +271,6 @@ window.onload = function() {
     }, 3000);
 };
 
-//LAZY LOADING 
-// Lazy loading for images, audio, and video
-function lazyLoadMedia() {
-    const lazyMedia = document.querySelectorAll('img[data-src], audio[data-src], video[data-src]');
-
-    // Observer for lazy loading
-    const lazyObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const element = entry.target;
-
-                // Replace data-src with src
-                if (element.tagName === "IMG" || element.tagName === "VIDEO" || element.tagName === "AUDIO") {
-                    element.src = element.dataset.src;
-                }
-
-                // Load additional data if available
-                if (element.tagName === "VIDEO" || element.tagName === "AUDIO") {
-                    element.load();
-                }
-
-                // Stop observing the loaded element
-                observer.unobserve(element);
-            }
-        });
-    });
-
-    // Observe all lazy media
-    lazyMedia.forEach(media => lazyObserver.observe(media));
-}
-
-// Call the functions on DOMContentLoaded
-document.addEventListener("DOMContentLoaded", () => {
-    adjustResourceScaling();
-    lazyLoadMedia();
-});
 
 
 
